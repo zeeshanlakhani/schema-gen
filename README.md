@@ -1,6 +1,6 @@
 # schema-gen
 
-[![Build Status](https://travis-ci.org/zeeshanlakhani/schema-gen.svg)](https://travis-ci.org/zeeshanlakhani/schema-gen)
+[![Build Status](https://travis-ci.org/zeeshanlakhani/schema-gen.svg)](https://travis-ci.org/zeeshanlakhani/schema-gen) [![Clojars Project](http://clojars.org/schema-gen/latest-version.svg)](http://clojars.org/schema-gen)
 
 Turn *Prismatic schemas* into generated data.
 
