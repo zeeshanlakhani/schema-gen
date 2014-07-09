@@ -10,6 +10,9 @@
 (declare schema->gen)
 (declare schema->gen*)
 
+(derive clojure.lang.PersistentArrayMap ::gen-map)
+(derive clojure.lang.PersistentHashMap ::gen-map)
+
 (defn optional-key-gen
   "Return (or not return) an optional-key."
   [[k v]]
@@ -72,7 +75,7 @@
   [_]
   gen/string-ascii)
 
-(defmethod schema->gen* clojure.lang.PersistentArrayMap
+(defmethod schema->gen* ::gen-map
   [e]
   (let [required (for [[k v] e
                        :when (or (keyword? k)
