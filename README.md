@@ -4,6 +4,8 @@
 
 Turn *Prismatic schemas* into generated data.
 
+Always keep-up w/ the [Prismatic](https://github.com/Prismatic/schema) [thread/issue](https://github.com/Prismatic/schema/issues/103) on data-generation from schemas.
+
 All good things here attributed to [@reiddraper](https://github.com/reiddraper), [@davegolland](https://github.com/davegolland), [@w01fe](https://github.com/w01fe), [@MichaelBlume](https://github.com/MichaelBlume), [@gfredericks](https://github.com/gfredericks).
 
 All not-good things can be attributed to me.
