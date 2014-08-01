@@ -16,12 +16,13 @@ All not-good things can be attributed to me.
 
 ## References
 
-- [Prismatic schema](https://github.com/Prismatic/schema) - declarative data description 
+- [Prismatic schema](https://github.com/Prismatic/schema) - declarative data description
 - John Hughes's [keynote](https://www.youtube.com/watch?v=zi0rHwfiX1Q) at ClojureWest 2014
 - Reid Draper's [test.check](https://github.com/clojure/test.check) [talk](https://www.youtube.com/watch?v=JMhNINPo__g) at ClojureWest 2014
-- [schema-typer](https://github.com/circleci/schema-typer) - core.typed w/ Prismatic schema 
+- [schema-typer](https://github.com/circleci/schema-typer) - core.typed w/ Prismatic schema
 - [@philandstuff](https://twitter.com/philandstuff)'s [EuroClojure](http://euroclojure.com/2014/) [slides/talk](http://www.philandstuff.com/slides/2014/euroclojure.html#/)
 - Multimethod approach shares ideas w/ [ring-swagger](https://github.com/metosin/ring-swagger)'s approach w/ Prismatic schema.
+- [schema-contrib](https://github.com/sfx/schema-contrib) - additional validators (and generators) for Prismatic schema.
 
 ## License
 

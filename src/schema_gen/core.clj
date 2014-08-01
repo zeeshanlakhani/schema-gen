@@ -21,7 +21,6 @@
    (gen/fmap (partial apply hash-map)
              (gen/tuple (schema->gen k) (schema->gen v)))))
 
-
 (defn re-randify-regex
   "Schema requires ^$ while re-rand forbids them."
   [re]
