@@ -101,14 +101,19 @@
                         [k (schema->gen v)]
                         (catch ExceptionInfo e
                           (if (-> e ex-data :root)
-                            (throw (ex-info (str "Schema type " (type v) " not implemented for key " k)
+                            (throw (ex-info (str
+                                             "Schema type " (type v)
+                                             " not implemented for key " k)
                                             (assoc (ex-data e)
                                               :key k
                                               :root false)))
                             (throw (ex-info (.getMessage e)
                                             (let [ex-data (ex-data e)
-                                                  key-path (or (:key-path ex-data) (list (:key ex-data)))]
-                                              (assoc ex-data :key-path (conj key-path k)))))))))
+                                                  key-path
+                                                  (or (:key-path ex-data)
+                                                     (list (:key ex-data)))]
+                                              (assoc ex-data :key-path
+                                                     (conj key-path k)))))))))
                     required)))))
 
 (defmethod schema->gen* clojure.lang.Sequential
