@@ -5,7 +5,8 @@
             [schema.core :as s]
             [clojure.test.check.generators :as gen]
             [clojure.test.check.rose-tree :as rose]
-            [clojure.string :as string]))
+            [clojure.string :as string])
+  (:import clojure.lang.ExceptionInfo))
 
 (declare schema->gen)
 (declare schema->gen*)
@@ -49,7 +50,8 @@
      (throw (ex-info (str "\nSchema type not implemented - " (class e)
                           "\nOnly these methods are implemented: "
                           (apply list (methods-supported)))
-                     {:type (class e)})))))
+                     {:type (class e)
+                      :root true})))))
 
 (defmethod schema->gen* :default
   [e])
@@ -78,7 +80,7 @@
   [e]
   (let [required (for [[k v] e
                        :when (or (keyword? k)
-                                (instance? schema.core.RequiredKey k))]
+                                 (instance? schema.core.RequiredKey k))]
                    [k v])
         rest (apply dissoc e (map first required))
         [optional [repeated]] (split-with
@@ -89,13 +91,24 @@
      (partial apply merge)
      (g/apply-by
       (partial into {})
-     (map optional-key-gen optional))
+      (map optional-key-gen optional))
      (if repeated
        (->> repeated (map schema->gen) (apply gen/map))
        (gen/return {}))
      (apply gen/hash-map
             (mapcat (fn [[k v]]
-                      [k (schema->gen v)])
+                      (try
+                        [k (schema->gen v)]
+                        (catch ExceptionInfo e
+                          (if (-> e ex-data :root)
+                            (throw (ex-info (str "Schema type " (type v) " not implemented for key " k)
+                                            (assoc (ex-data e)
+                                              :key k
+                                              :root false)))
+                            (throw (ex-info (.getMessage e)
+                                            (let [ex-data (ex-data e)
+                                                  key-path (or (:key-path ex-data) (list (:key ex-data)))]
+                                              (assoc ex-data :key-path (conj key-path k)))))))))
                     required)))))
 
 (defmethod schema->gen* clojure.lang.Sequential
