@@ -2,7 +2,8 @@
   (:require [schema.core :as s]
             [schema-gen.core :refer :all]
             [schema-gen.test-util :refer [deftest-gen test-gen]]
-            [clojure.test :refer :all])
+            [clojure.test :refer :all]
+            [clojure.test.check.generators :as gen])
   (:import clojure.lang.ExceptionInfo))
 
 (def s-vector
@@ -58,3 +59,7 @@
                                (catch ExceptionInfo e e))
                           ex-data
                           :key-path))))
+
+;; regression test
+(deftest test-maybe-regex
+  (is (gen/generator? (schema->gen (s/maybe #"abc")))))
