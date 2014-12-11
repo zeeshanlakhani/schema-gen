@@ -7,7 +7,7 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [com.gfredericks/re-rand "0.1.1"]
                  [prismatic/schema "0.2.6"]
-                 [org.clojure/test.check "0.5.8"]]
+                 [org.clojure/test.check "0.6.1"]]
   :lein-release {:deploy-via :shell
                  :shell ["lein" "deploy" "clojars"]}
   :scm {:name "git"

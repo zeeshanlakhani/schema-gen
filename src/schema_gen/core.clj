@@ -173,6 +173,7 @@
 (defmethod schema->gen* java.util.regex.Pattern
   [e]
   (let [re (re-randify-regex e)]
-    {:gen (fn [r _size]
-            (binding [four/*rand* r]
-              (rose/pure (re-rand re))))}))
+    (gen/make-gen
+     (fn [r _size]
+       (binding [four/*rand* r]
+         (rose/pure (re-rand re)))))))
