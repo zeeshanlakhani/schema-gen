@@ -1,4 +1,4 @@
-(defproject schema-gen "0.1.2"
+(defproject schema-gen "0.1.3"
   :description "Turn Prismatic schemas into generated data using test.check."
   :url "https://github.com/zeeshanlakhani/schema-gen"
   :license {:name "Eclipse Public License"
@@ -6,8 +6,8 @@
             :distribution :repo}
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [com.gfredericks/re-rand "0.1.1"]
-                 [prismatic/schema "0.2.6"]
-                 [org.clojure/test.check "0.6.1"]]
+                 [prismatic/schema "0.3.3"]
+                 [org.clojure/test.check "0.6.2"]]
   :lein-release {:deploy-via :shell
                  :shell ["lein" "deploy" "clojars"]}
   :scm {:name "git"
