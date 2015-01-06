@@ -6,8 +6,15 @@
             [clojure.test.check.generators :as gen])
   (:import clojure.lang.ExceptionInfo))
 
+(def s-basic-vector
+  [s/Keyword])
+
 (def s-vector
-  [(s/one s/Bool "first") (s/one s/Num "second") (s/optional s/Keyword "maybe") s/Int])
+  [(s/one s/Bool "first")
+   (s/one s/Num "second")
+   (s/one #"[a-z0-9]" "third")
+   (s/optional s/Keyword "maybe")
+   s/Int])
 
 (def s-hashmap
   {:foo s/Int
@@ -36,6 +43,9 @@
    :baz {:bar s/Str
          :quux (s/pred empty?)}})
 
+(def test-property-basic-vector
+  (test-gen s-basic-vector))
+
 (def test-property-vector
   (test-gen s-vector))
 
@@ -48,13 +58,16 @@
 (def test-property-hashmap-3
   (test-gen s-hashmap-with-vector))
 
-(deftest-gen test-vector 100 test-property-vector {:max-size 20})
-(deftest-gen test-hashmap 100 test-property-hashmap {:max-size 20})
-(deftest-gen test-hashmap-2 100 test-property-hashmap-2 {:max-size 20})
-(deftest-gen test-hashmap-3 100 test-property-hashmap-3 {:max-size 20})
+(deftest-gen test-basic-vector 100 test-property-basic-vector
+  {:max-size 100 :seed 100})
+(deftest-gen test-vector 200 test-property-vector)
+(deftest-gen test-hashmap 100 test-property-hashmap)
+(deftest-gen test-hashmap-2 100 test-property-hashmap-2)
+(deftest-gen test-hashmap-3 100 test-property-hashmap-3)
 
 (deftest test-predicate-error-msg
-  (is (thrown-with-msg? ExceptionInfo #":baz" (schema->gen s-hashmap-with-predicate)))
+  (is (thrown-with-msg? ExceptionInfo #":baz"
+                        (schema->gen s-hashmap-with-predicate)))
   (is (= [:baz :quux] (-> (try (schema->gen s-hashmap-with-buried-predicate)
                                (catch ExceptionInfo e e))
                           ex-data
