@@ -1,7 +1,6 @@
 (ns schema-gen.core
   (:require [schema-gen.util.gen :as g]
-            [four.stateful :as four]
-            [re-rand :refer [re-rand]]
+            [com.gfredericks.test.chuck.generators :refer [string-from-regex]]
             [schema.core :as s]
             [clojure.test.check.generators :as gen]
             [clojure.test.check.rose-tree :as rose]
@@ -21,14 +20,6 @@
    (gen/return {})
    (gen/fmap (partial apply hash-map)
              (gen/tuple (schema->gen k) (schema->gen v)))))
-
-(defn re-randify-regex
-  "Schema requires ^$ while re-rand forbids them."
-  [re]
-  (let [s (str re)]
-    (if (re-matches #"\^.*\$" s)
-      (re-pattern (subs s 1 (dec (count s))))
-      re)))
 
 (defn methods-supported
   []
@@ -172,8 +163,4 @@
 
 (defmethod schema->gen* java.util.regex.Pattern
   [e]
-  (let [re (re-randify-regex e)]
-    (gen/make-gen
-     (fn [r _size]
-       (binding [four/*rand* r]
-         (rose/pure (re-rand re)))))))
+  (string-from-regex e))
