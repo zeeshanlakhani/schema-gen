@@ -34,15 +34,12 @@
 
 (defmethod schema->gen :default
   [e]
-  (or
-   (schema->gen* e)
-   (if (s/schema-name e)
-     {:$ref (s/schema-name e)}
-     (throw (ex-info (str "\nSchema type not implemented - " (class e)
-                          "\nOnly these methods are implemented: "
-                          (apply list (methods-supported)))
-                     {:type (class e)
-                      :root true})))))
+  (or (schema->gen* e)
+      (throw (ex-info (str "\nSchema type not implemented - " (type e)
+                           "\nOnly these methods are implemented: "
+                           (apply list (methods-supported)))
+                      {:type (type e)
+                       :root true}))))
 
 (defmethod schema->gen* :default
   [e])
