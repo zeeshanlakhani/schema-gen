@@ -30,7 +30,7 @@
      (remove #(= % :default))))
 
 (defmulti schema->gen  identity)
-(defmulti schema->gen* class)
+(defmulti schema->gen* type)
 
 (defmethod schema->gen :default
   [e]
