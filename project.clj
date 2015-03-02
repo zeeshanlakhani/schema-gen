@@ -1,6 +1,6 @@
-(defproject schema-gen "0.1.4"
+(defproject com.lingyong/schema-gen "0.1.4-p1"
   :description "Turn Prismatic schemas into generated data using test.check."
-  :url "https://github.com/zeeshanlakhani/schema-gen"
+  :url "https://github.com/lingyong/schema-gen"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"
             :distribution :repo}
@@ -11,4 +11,4 @@
   :lein-release {:deploy-via :shell
                  :shell ["lein" "deploy" "clojars"]}
   :scm {:name "git"
-        :url "https://github.com/zeeshanlakhani/schema-gen"})
+        :url "https://github.com/lingyong/schema-gen"})
