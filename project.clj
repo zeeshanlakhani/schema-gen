@@ -5,7 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"
             :distribution :repo}
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [com.gfredericks/test.chuck "0.1.14"]
+                 [com.gfredericks/test.chuck "0.1.17"]
                  [prismatic/schema "0.3.7"]
                  [org.clojure/test.check "0.7.0"]]
   :lein-release {:deploy-via :shell
