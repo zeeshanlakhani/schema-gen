@@ -1,4 +1,4 @@
-(defproject schema-gen "0.1.4"
+(defproject schema-gen "0.1.5"
   :description "Turn Prismatic schemas into generated data using test.check."
   :url "https://github.com/zeeshanlakhani/schema-gen"
   :license {:name "Eclipse Public License"
